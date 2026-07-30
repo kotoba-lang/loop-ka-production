@@ -55,4 +55,33 @@
    :produces :episode-from-topic
    :actor "yukkuri.aozora.app"
    :slots 1
+   :requires #{:ffmpeg :nbb}}
+
+  ;; SHIRO & PICO (the GHOSTHACKER series). Not a `-ka` repo, and registered
+  ;; here anyway: the five verbs this loop owns — cadence, admission, verdict,
+  ;; evidence — are the same ones a dedicated `loop-shiropico` would have had to
+  ;; reimplement, and this repo exists precisely because every channel used to
+  ;; carry its own copy. See ADR-2607309900.
+  ;;
+  ;; :catalog is `production-catalog`, NOT the repo's existing `catalog/` — that
+  ;; one holds ai-gftd-datasets.json and would list zero .edn files, reading as
+  ;; an exhausted catalog rather than a misconfiguration. Same trap as yukkuri's
+  ;; `content/` above.
+  ;;
+  ;; Only episodes 11 and 12 are in the catalog. Episodes 1-10 have scripts but
+  ;; no shotlist, so the producer has nothing to render for them; listing them
+  ;; would have this loop admit work it then grades.
+  ;;
+  ;; The producer reports :placeholder/:silent legs when no render backend is
+  ;; reachable, so a node without one produces a :degraded verdict and a hold —
+  ;; not a published flat card.
+  {:id :shiropico
+   :repo "orgs/com-junkawasaki/ghosthacker-shiropico"
+   :producer ["nbb" "--classpath" "src" "bin/produce.cljs"]
+   :produces :episode-from-catalog
+   :catalog "production-catalog"
+   ;; Evidence only — the publish leg lives in that repo's own `clj/` actor
+   ;; (advisor ⊣ PolicyGovernor ⊣ ledger) with its own key. This loop holds none.
+   :actor "shiropico.aozora.app"
+   :slots 1
    :requires #{:ffmpeg :nbb}}]}
