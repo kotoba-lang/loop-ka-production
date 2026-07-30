@@ -1,0 +1,58 @@
+;; The -ka channels this loop orchestrates.
+;;
+;; One entry per publishing channel. The loop does NOT know how to produce a
+;; video — each channel names the command that does, in its own repo. That is
+;; deliberate: production logic belongs to the -ka repo that owns the craft, and
+;; this loop owns cadence, admission and evidence.
+;;
+;; :id            stable key used in ledger records and task labels
+;; :repo          workspace-relative checkout the producer runs in
+;; :producer      argv template; %s substitutions documented per :produces
+;; :produces      :episode-from-catalog — picks the next unconsumed catalog entry
+;;                :episode-from-topic   — needs a topic supplied per run
+;; :catalog       dir of plan files, when :produces is :episode-from-catalog
+;; :actor         aozora handle the channel publishes under (evidence only —
+;;                the publish leg lives in the channel's own repo, with its own
+;;                key; this loop never holds a publishing key)
+;; :slots         how many concurrent runs this channel tolerates on one node
+;; :requires      capabilities a node must have to run it (murakumo placement)
+{:channels/version 1
+ :channels
+ [{:id :dougaka
+   :repo "orgs/cloud-itonami/dougaka-actor"
+   :producer ["clojure" "-M:dev" "-m" "dougaka.outer-loop"]
+   :produces :episode-from-catalog
+   :catalog "videos"
+   :actor "dougaka.aozora.app"
+   :slots 1
+   :requires #{:ffmpeg :clojure}}
+
+  {:id :minidrama
+   :repo "orgs/etzhayyim/com-etzhayyim-minidrama"
+   :producer ["clojure" "-M:dev" "-m" "minidrama.outer-loop"]
+   :produces :episode-from-catalog
+   :catalog "episodes"
+   :actor "minidrama.aozora.app"
+   :slots 1
+   :requires #{:ffmpeg :clojure}}
+
+  {:id :dougaka-vector
+   :repo "orgs/cloud-itonami/dougaka-vector"
+   :producer ["nbb" "--classpath" "src" "bin/render.cljs"]
+   :produces :episode-from-topic
+   :actor "dougaka-vector.aozora.app"
+   :slots 2
+   :requires #{:ffmpeg :nbb}}
+
+  ;; yukkuri has no episode catalog yet. Registering `content/` as one was wrong
+  ;; and immediately visible: that dir holds topic corpora (anime.edn,
+  ;; cyber-cisa-yougo.edn) and md-as-edn docs, so the first plan selected
+  ;; "README.md" as tonight's episode. A catalog is a running order of episode
+  ;; plans, not whatever .edn files a directory happens to contain.
+  {:id :yukkuri
+   :repo "orgs/cloud-itonami/yukkuri"
+   :producer ["nbb" "--classpath" "clj/src" "scripts/publish_aozora.cljs"]
+   :produces :episode-from-topic
+   :actor "yukkuri.aozora.app"
+   :slots 1
+   :requires #{:ffmpeg :nbb}}]}
