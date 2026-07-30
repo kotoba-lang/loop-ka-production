@@ -84,4 +84,31 @@
    ;; (advisor ⊣ PolicyGovernor ⊣ ledger) with its own key. This loop holds none.
    :actor "shiropico.aozora.app"
    :slots 1
-   :requires #{:ffmpeg :nbb}}]}
+   :requires #{:ffmpeg :nbb}}
+
+  ;; GHOST HACKER — the series itself, as manga. Registered on the same grounds
+  ;; as :shiropico (ADR-2607309900): the five verbs are this repo's, not each
+  ;; channel's. The 2026-06 note calling this series superseded by
+  ;; kami-engine/kami-app-sip-clj was retracted 2026-07-30 — that path holds
+  ;; .shadow-cljs/ and public/ and nothing else, and kami-engine contains zero
+  ;; references to the series.
+  ;;
+  ;; The unit is one episode = one directory under
+  ;; 260123-jump/resources/episodes/. Six are in the catalog;
+  ;; ep1-komawari-redesign is not, because it has no episode id and zero panels.
+  ;;
+  ;; :requires has no :ffmpeg. This is manga — panels get images, nothing gets
+  ;; muxed. Copying the video channels' requirement would have the placer demand
+  ;; a capability the work never uses and skip nodes that could run it.
+  ;;
+  ;; The producer reports :video per panel and :voice [] — a manga has no
+  ;; narration leg, and an empty voice list is not graded degraded. See that
+  ;; repo's PRODUCING.md.
+  {:id :ghosthacker
+   :repo "orgs/com-junkawasaki/ghosthacker"
+   :producer ["nbb" "--classpath" "src" "scripts/produce.cljs"]
+   :produces :episode-from-catalog
+   :catalog "production-catalog"
+   :actor "ghosthacker.aozora.app"
+   :slots 1
+   :requires #{:nbb}}]}
