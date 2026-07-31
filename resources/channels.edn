@@ -77,7 +77,10 @@
   ;; not a published flat card.
   {:id :shiropico
    :repo "orgs/com-junkawasaki/ghosthacker-shiropico"
-   :producer ["nbb" "--classpath" "src" "bin/produce.cljs"]
+   ;; comfyui.native-client (kotoba-lang/comfyui) is on the classpath rather
+   ;; than copied into the content repo. The path is relative because the
+   ;; producer runs with cwd = <workspace>/<repo>.
+   :producer ["nbb" "--classpath" "src:../../kotoba-lang/comfyui/src" "bin/produce.cljs"]
    :produces :episode-from-catalog
    :catalog "production-catalog"
    ;; Evidence only — the publish leg lives in that repo's own `clj/` actor
@@ -106,7 +109,7 @@
   ;; repo's PRODUCING.md.
   {:id :ghosthacker
    :repo "orgs/com-junkawasaki/ghosthacker"
-   :producer ["nbb" "--classpath" "src" "scripts/produce.cljs"]
+   :producer ["nbb" "--classpath" "src:../../kotoba-lang/comfyui/src" "scripts/produce.cljs"]
    :produces :episode-from-catalog
    :catalog "production-catalog"
    :actor "ghosthacker.aozora.app"
