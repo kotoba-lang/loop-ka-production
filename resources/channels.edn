@@ -107,6 +107,34 @@
   ;; The producer reports :video per panel and :voice [] — a manga has no
   ;; narration leg, and an empty voice list is not graded degraded. See that
   ;; repo's PRODUCING.md.
+  ;; gameka — games, not video. Registered on the same grounds as :shiropico
+  ;; and :ghosthacker: the five verbs are this repo's, not each channel's.
+  ;;
+  ;; :catalog is `specs`, the gameSpec running order. A build is one spec.
+  ;;
+  ;; :requires has no :ffmpeg. Nothing is muxed — the producer renders runtime
+  ;; sources and per-cue audio, and the runtime assembles at play time.
+  ;;
+  ;; Leg vocabulary, following the :ghosthacker precedent below: the producer
+  ;; reports :video per generated **audio cue** (:murakumo when the fleet
+  ;; rendered it, :placeholder when it fell back) and :voice [] — a game has no
+  ;; narration, and an empty voice list is not graded degraded. The keys are
+  ;; video-shaped because the first four channels were video; what is graded is
+  ;; "did the generative legs run", which is the same question either way.
+  ;;
+  ;; A game with silent weapons is not a release: the weapon cue is the only
+  ;; feedback that auto-fire is working and the boss telegraph is the only
+  ;; warning a dodgeable attack is coming, so a placeholder cue set grades
+  ;; :degraded and holds, exactly like a flat-colour card.
+  {:id :gameka
+   :repo "orgs/cloud-itonami/gameka"
+   :producer ["clojure" "-M:produce"]
+   :produces :episode-from-catalog
+   :catalog "specs"
+   :actor "gameka.aozora.app"
+   :slots 1
+   :requires #{:clojure}}
+
   {:id :ghosthacker
    :repo "orgs/com-junkawasaki/ghosthacker"
    :producer ["nbb" "--classpath" "src:../../kotoba-lang/comfyui/src" "scripts/produce.cljs"]
