@@ -106,8 +106,16 @@
   ;; references to the series.
   ;;
   ;; The unit is one episode = one directory under
-  ;; 260123-jump/resources/episodes/. Six are in the catalog;
-  ;; ep1-komawari-redesign is not, because it has no episode id and zero panels.
+  ;; 260123-jump/resources/episodes/. **Not all of them are in the catalog**:
+  ;; that repo's scripts/gen-catalog.cljs drops any episode with zero panels,
+  ;; because a plan the producer cannot render would be admitted here and then
+  ;; graded. ep1-komawari-redesign (episode-id nil, 5 pages of komawari design
+  ;; notes, 0 panels) is the standing example — and it was in the catalog for a
+  ;; while, because the generator did not know the exclusion written here.
+  ;;
+  ;; No count is given on purpose. This comment said "six" while the catalog
+  ;; held fourteen; a number here goes stale by construction, and reads as
+  ;; measured.
   ;;
   ;; :requires has no :ffmpeg. This is manga — panels get images, nothing gets
   ;; muxed. Copying the video channels' requirement would have the placer demand
