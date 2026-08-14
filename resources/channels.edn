@@ -87,7 +87,16 @@
    ;; (advisor ⊣ PolicyGovernor ⊣ ledger) with its own key. This loop holds none.
    :actor "shiropico.aozora.app"
    :slots 1
-   :requires #{:ffmpeg :nbb}}
+   ;; :requires has no :ffmpeg. Measured 2026-08-14: bin/produce.cljs writes
+   ;; PNGs (ComfyUI) and WAVs (kokoro) and stops — there is no mux, concat or
+   ;; mp4 anywhere in it. The 26s ep01 motion comic in B2 came from an earlier
+   ;; Seedance path, not from this producer.
+   ;;
+   ;; Requiring a capability the producer never calls does not fail loudly — it
+   ;; makes the placer skip nodes that could have run the job, which is the trap
+   ;; the :ghosthacker entry below names. Add :ffmpeg back together with a mux
+   ;; step, not in anticipation of one.
+   :requires #{:nbb}}
 
   ;; GHOST HACKER — the series itself, as manga. Registered on the same grounds
   ;; as :shiropico (ADR-2607309900): the five verbs are this repo's, not each
