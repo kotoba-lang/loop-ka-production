@@ -18,14 +18,28 @@
 ;; :requires      capabilities a node must have to run it (murakumo placement)
 {:channels/version 1
  :channels
+ ;; :repo is the west-REGISTERED path (manifest/west.yml `ai-gftd-dougaka-actor`).
+ ;; `orgs/cloud-itonami/dougaka-actor` is the pre-rename checkout that still
+ ;; sits on disk unregistered; pointing here at it meant the nightly loop ran
+ ;; against a tree no pin governs. Measured 2026-08-22: both paths existed,
+ ;; both held the same ten designs, and only one of them is what `west update`
+ ;; advances.
+ ;;
+ ;; The producer's chain is `scripts/produce-video.cljs` (nbb, 2026-08-22;
+ ;; was a .bb) → `dougaka.produce --from videos/<slug>.edn` (DougakaGovernor)
+ ;; → engine `dougaka.pipeline` in cloud-itonami/ai-gftd-dougaka → mp4 + SRT +
+ ;; `legs.edn`. That legs file is what `record --legs` reads. The engine
+ ;; needs :ffmpeg; the actor and engine need :clojure; the chain script needs
+ ;; :nbb — the node must have all three or the chain stops at step 1 or 2 with
+ ;; the step's own exit, which the loop records as a hold.
  [{:id :dougaka
-   :repo "orgs/cloud-itonami/dougaka-actor"
+   :repo "orgs/cloud-itonami/ai-gftd-dougaka-actor"
    :producer ["clojure" "-M:dev" "-m" "dougaka.outer-loop"]
    :produces :episode-from-catalog
    :catalog "videos"
    :actor "dougaka.aozora.app"
    :slots 1
-   :requires #{:ffmpeg :clojure}}
+   :requires #{:ffmpeg :clojure :nbb}}
 
   {:id :minidrama
    :repo "orgs/etzhayyim/com-etzhayyim-minidrama"
