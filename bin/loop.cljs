@@ -20,7 +20,7 @@
   (:require ["fs" :as fs]
             ["path" :as path]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [loop-ka.decide :as decide]
             [loop-ka.evaluate :as ev]
             [loop-ka.ledger :as ledger]
