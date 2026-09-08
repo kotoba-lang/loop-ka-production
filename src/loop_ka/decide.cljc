@@ -8,7 +8,7 @@
   Phases mirror the -ka actors' existing rollout vocabulary (dougaka-actor /
   minidrama README): 0 draft = ledger only, 1 unlisted = preview, 2 public =
   needs a standing grant or a per-episode human sign-off."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def phases #{0 1 2})
 
@@ -58,5 +58,5 @@
       {:action :publish :reason :allowed :phase phase :grade grade})))
 
 (defn explain [{:keys [action reason phase grade]}]
-  (str (str/upper-case (name action))
+  (str (str/upper (name action))
        "  phase=" phase " grade=" (name grade) "  (" (name reason) ")"))

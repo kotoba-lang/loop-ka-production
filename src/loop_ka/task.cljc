@@ -10,7 +10,7 @@
   one run by hand.
 
   So this namespace emits a plain data batch and nothing executes here."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn- shell-quote [s]
   (str "'" (str/replace (str s) "'" "'\\''") "'"))

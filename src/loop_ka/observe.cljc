@@ -4,7 +4,7 @@
   Pure: every input is passed in (the channel registry, the catalog listing, the
   ledger's consumed keys, the clock). Nothing here reads a filesystem or a
   clock, so the whole admission decision is testable without a fleet."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn slot-key
   "The idempotency key for one production slot: channel + date + slot index.

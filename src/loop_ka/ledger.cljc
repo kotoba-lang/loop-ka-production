@@ -19,7 +19,7 @@
   those. Choosing a separate ref for write throughput would make that join
   impossible, permanently."
   (:require [clojure.edn :as edn]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (def dataset "loop-ka-production")
 
