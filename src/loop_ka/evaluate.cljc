@@ -14,7 +14,7 @@
   image, :murakumo/:local/:silent for the voice, plus whether a bed and cues
   landed. Two weeks of flat-colour cards shipped nightly because nothing looked
   at it."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def degraded-video #{:placeholder})
 (def degraded-voice #{:silent})
@@ -73,7 +73,7 @@
   "A verdict -> one human line. The app and the CLI show the same sentence, so
   an operator reading the panel and an operator reading the log agree."
   [{:keys [grade counts reasons]}]
-  (str (str/upper-case (name grade))
+  (str (str/upper (name grade))
        "  shots=" (:shots counts)
        " bed=" (if (:bed? counts) "yes" "no")
        " cues=" (:cues counts)
