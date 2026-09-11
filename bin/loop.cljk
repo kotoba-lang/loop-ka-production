@@ -6,11 +6,11 @@
   runner). `plan` emits a murakumo task batch and stops; the resident path is
   `murakumo task run --tasks`, but the same batch runs under launchd or by hand.
 
-    nbb --classpath src:resources bin/loop.cljs observe [--date YYYY-MM-DD] [--slot 0]
-    nbb ... bin/loop.cljs plan   --workspace <dir> [--out tasks.edn]
-    nbb ... bin/loop.cljs record --channel dougaka --episode <id> --legs legs.edn
+    nbb --classpath src:resources bin/loop.cljk observe [--date YYYY-MM-DD] [--slot 0]
+    nbb ... bin/loop.cljk plan   --workspace <dir> [--out tasks.edn]
+    nbb ... bin/loop.cljk record --channel dougaka --episode <id> --legs legs.edn
                                  [--phase 1] [--approve publish]
-    nbb ... bin/loop.cljs report [--last 20]
+    nbb ... bin/loop.cljk report [--last 20]
 
   `observe` and `plan` never execute a producer and never publish. `record` is
   what a producer calls when it finishes: it grades the run's own :legs report,

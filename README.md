@@ -36,23 +36,23 @@ loop-ka.task       -> a task batch (data; nothing executes here)
 loop-ka.ledger     one append-only record per run
 ```
 
-All pure `.cljc`. `bin/loop.cljs` is the only IO.
+All pure `.cljc`. `bin/loop.cljk` is the only IO.
 
 ## Use
 
 ```bash
 # what would run tonight, and why the rest would not
-nbb --classpath src:resources bin/loop.cljs observe --workspace <dir>
+nbb --classpath src:resources bin/loop.cljk observe --workspace <dir>
 
 # emit the batch for the fleet
-nbb ... bin/loop.cljs plan --workspace <dir> --out tasks.edn
+nbb ... bin/loop.cljk plan --workspace <dir> --out tasks.edn
 nbb ../murakumo/scripts/run-task.cljs task run --tasks tasks.edn
 
 # a producer reports what it actually did, and learns whether it may publish
-nbb ... bin/loop.cljs record --channel dougaka --episode <id> --legs legs.edn --phase 1
+nbb ... bin/loop.cljk record --channel dougaka --episode <id> --legs legs.edn --phase 1
 #   exit 0 = publish   10 = hold   11 = discard
 
-nbb ... bin/loop.cljs report --last 20
+nbb ... bin/loop.cljk report --last 20
 ```
 
 **The exit code is the contract.** A producer must not have to parse prose to
@@ -84,7 +84,7 @@ selected `amaoto-no-arcade` and `alarm-ai` — **both already live**. Seed once
 per channel before the first real tick:
 
 ```bash
-nbb ... bin/loop.cljs seed --channel dougaka --episodes amaoto-no-arcade,asaichi-no-koori
+nbb ... bin/loop.cljk seed --channel dougaka --episodes amaoto-no-arcade,asaichi-no-koori
 ```
 
 A seed consumes the *episode* (so the catalog advances) but not a *slot* (so
