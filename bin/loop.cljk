@@ -6,7 +6,7 @@
   runner). `plan` emits a murakumo task batch and stops; the resident path is
   `murakumo task run --tasks`, but the same batch runs under launchd or by hand.
 
-    nbb --classpath src:resources bin/loop.cljk observe [--date YYYY-MM-DD] [--slot 0]
+    kbb --backend sci --classpath src:resources bin/loop.cljk observe [--date YYYY-MM-DD] [--slot 0]
     nbb ... bin/loop.cljk plan   --workspace <dir> [--out tasks.edn]
     nbb ... bin/loop.cljk record --channel dougaka --episode <id> --legs legs.edn
                                  [--phase 1] [--approve publish]

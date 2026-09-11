@@ -42,11 +42,11 @@ All pure `.cljc`. `bin/loop.cljk` is the only IO.
 
 ```bash
 # what would run tonight, and why the rest would not
-nbb --classpath src:resources bin/loop.cljk observe --workspace <dir>
+kbb --backend sci --classpath src:resources bin/loop.cljk observe --workspace <dir>
 
 # emit the batch for the fleet
 nbb ... bin/loop.cljk plan --workspace <dir> --out tasks.edn
-nbb ../murakumo/scripts/run-task.cljs task run --tasks tasks.edn
+kbb --backend sci ../murakumo/scripts/run-task.cljk task run --tasks tasks.edn
 
 # a producer reports what it actually did, and learns whether it may publish
 nbb ... bin/loop.cljk record --channel dougaka --episode <id> --legs legs.edn --phase 1

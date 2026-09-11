@@ -34,7 +34,7 @@
  ;; the step's own exit, which the loop records as a hold.
  [{:id :dougaka
    :repo "orgs/cloud-itonami/ai-gftd-dougaka-actor"
-   :producer ["clojure" "-M:dev" "-m" "dougaka.outer-loop"]
+   :producer ["kbb" "-M:dev" "-m" "dougaka.outer-loop"]
    :produces :episode-from-catalog
    :catalog "videos"
    :actor "dougaka.aozora.app"
@@ -43,7 +43,7 @@
 
   {:id :minidrama
    :repo "orgs/etzhayyim/com-etzhayyim-minidrama"
-   :producer ["clojure" "-M:dev" "-m" "minidrama.outer-loop"]
+   :producer ["kbb" "-M:dev" "-m" "minidrama.outer-loop"]
    :produces :episode-from-catalog
    :catalog "episodes"
    :actor "minidrama.aozora.app"
@@ -52,7 +52,7 @@
 
   {:id :dougaka-vector
    :repo "orgs/cloud-itonami/dougaka-vector"
-   :producer ["nbb" "--classpath" "src" "bin/render.cljs"]
+   :producer ["kbb" "--backend" "sci" "--classpath" "src" "bin/render.cljs"]
    :produces :episode-from-topic
    :actor "dougaka-vector.aozora.app"
    :slots 2
@@ -65,7 +65,7 @@
   ;; plans, not whatever .edn files a directory happens to contain.
   {:id :yukkuri
    :repo "orgs/cloud-itonami/yukkuri"
-   :producer ["nbb" "--classpath" "clj/src" "scripts/publish_aozora.cljs"]
+   :producer ["kbb" "--backend" "sci" "--classpath" "clj/src" "scripts/publish_aozora.cljs"]
    :produces :episode-from-topic
    :actor "yukkuri.aozora.app"
    :slots 1
@@ -94,7 +94,7 @@
    ;; comfyui.native-client (kotoba-lang/comfyui) is on the classpath rather
    ;; than copied into the content repo. The path is relative because the
    ;; producer runs with cwd = <workspace>/<repo>.
-   :producer ["nbb" "--classpath" "src:../../kotoba-lang/comfyui/src" "bin/produce.cljs"]
+   :producer ["kbb" "--backend" "sci" "--classpath" "src:../../kotoba-lang/comfyui/src" "bin/produce.cljs"]
    :produces :episode-from-catalog
    :catalog "production-catalog"
    ;; Evidence only — the publish leg lives in that repo's own `clj/` actor
@@ -159,7 +159,7 @@
   ;; :degraded and holds, exactly like a flat-colour card.
   {:id :gameka
    :repo "orgs/cloud-itonami/gameka"
-   :producer ["clojure" "-M:produce"]
+   :producer ["kbb" "-M:produce"]
    :produces :episode-from-catalog
    :catalog "specs"
    :actor "gameka.aozora.app"
@@ -168,7 +168,7 @@
 
   {:id :ghosthacker
    :repo "orgs/com-junkawasaki/ghosthacker"
-   :producer ["nbb" "--classpath" "src:../../kotoba-lang/comfyui/src" "scripts/produce.cljs"]
+   :producer ["kbb" "--backend" "sci" "--classpath" "src:../../kotoba-lang/comfyui/src" "scripts/produce.cljs"]
    :produces :episode-from-catalog
    :catalog "production-catalog"
    :actor "ghosthacker.aozora.app"
