@@ -9,7 +9,7 @@
 
 (def channels
   [{:id :dougaka :repo "orgs/cloud-itonami/dougaka-actor"
-    :producer ["clojure" "-M:dev" "-m" "dougaka.outer-loop"]
+    :producer ["kbb" "-M:dev" "-m" "dougaka.outer-loop"]
     :produces :episode-from-catalog :slots 1 :requires #{:ffmpeg :clojure}}
    {:id :vector :repo "orgs/cloud-itonami/dougaka-vector"
     :producer ["nbb" "bin/render.cljs"]
