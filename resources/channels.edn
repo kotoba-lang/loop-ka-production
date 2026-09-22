@@ -52,7 +52,7 @@
 
   {:id :dougaka-vector
    :repo "orgs/cloud-itonami/dougaka-vector"
-   :producer ["kbb" "--backend" "sci" "--classpath" "src" "bin/render.cljs"]
+   :producer ["kbb" "--backend" "sci" "--classpath" "src" "bin/render.cljk"]
    :produces :episode-from-topic
    :actor "dougaka-vector.aozora.app"
    :slots 2
@@ -94,7 +94,7 @@
    ;; comfyui.native-client (kotoba-lang/comfyui) is on the classpath rather
    ;; than copied into the content repo. The path is relative because the
    ;; producer runs with cwd = <workspace>/<repo>.
-   :producer ["kbb" "--backend" "sci" "--classpath" "src:../../kotoba-lang/comfyui/src" "bin/produce.cljs"]
+   :producer ["kbb" "--backend" "sci" "--classpath" "src:../../kotoba-lang/comfyui/src" "bin/produce.cljk"]
    :produces :episode-from-catalog
    :catalog "production-catalog"
    ;; Evidence only — the publish leg lives in that repo's own `clj/` actor
