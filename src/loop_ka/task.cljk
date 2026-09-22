@@ -66,6 +66,6 @@
   Named here rather than embedded in a script so the CLI, the docs and the
   cloud-itonami-app panel all quote the same invocation."
   [{:keys [tasks-file murakumo-dir max-inflight]}]
-  (cond-> ["nbb" (str (or murakumo-dir ".") "/scripts/run-task.cljs")
+  (cond-> ["kbb" "--backend" "sci" (str (or murakumo-dir ".") "/scripts/run-task.cljk")
            "task" "run" "--tasks" (str tasks-file)]
     max-inflight (into ["--max-inflight" (str max-inflight)])))

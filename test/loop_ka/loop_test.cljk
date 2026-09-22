@@ -12,7 +12,7 @@
     :producer ["kbb" "-M:dev" "-m" "dougaka.outer-loop"]
     :produces :episode-from-catalog :slots 1 :requires #{:ffmpeg :clojure}}
    {:id :vector :repo "orgs/cloud-itonami/dougaka-vector"
-    :producer ["nbb" "bin/render.cljs"]
+    :producer ["kbb" "--backend" "sci" "--classpath" "src" "bin/render.cljk"]
     :produces :episode-from-topic :slots 2 :requires #{:ffmpeg :nbb}}])
 
 ;; ── observe ─────────────────────────────────────────────────────────────────
@@ -144,7 +144,7 @@
 
 (deftest murakumo-argv-is-the-quoted-invocation
   (let [a (task/murakumo-argv {:tasks-file "/tmp/t.edn" :murakumo-dir "/m" :max-inflight 4})]
-    (is (= ["nbb" "/m/scripts/run-task.cljs" "task" "run" "--tasks" "/tmp/t.edn"
+    (is (= ["kbb" "--backend" "sci" "/m/scripts/run-task.cljk" "task" "run" "--tasks" "/tmp/t.edn"
             "--max-inflight" "4"] a))))
 
 ;; ── record-evidence ─────────────────────────────────────────────────────────
