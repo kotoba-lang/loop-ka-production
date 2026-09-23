@@ -18,7 +18,7 @@
   with repo-maturity / fleet / market-intel they must live on the SAME ref as
   those. Choosing a separate ref for write throughput would make that join
   impossible, permanently."
-  (:require [clojure.edn :as edn]
+  (:require [kotoba.lang.edn :as edn]
             [kotoba.lang.text :as str]))
 
 (def dataset "loop-ka-production")

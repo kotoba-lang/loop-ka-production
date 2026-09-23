@@ -19,7 +19,7 @@
   publishing key and mints no CACAO."
   (:require ["fs" :as fs]
             ["path" :as path]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             [kotoba.lang.text :as str]
             [loop-ka.decide :as decide]
             [loop-ka.evaluate :as ev]
