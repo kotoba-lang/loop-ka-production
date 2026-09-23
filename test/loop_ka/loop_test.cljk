@@ -1,6 +1,6 @@
 (ns loop-ka.loop-test
   (:require [kotoba.lang.text :as str]
-            [clojure.test :refer [deftest is testing]]
+            [kotoba.test :refer [deftest is testing]]
             [loop-ka.decide :as decide]
             [loop-ka.evaluate :as ev]
             [loop-ka.ledger :as ledger]
