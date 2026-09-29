@@ -100,7 +100,7 @@ facts. `cloud-itonami-app` needs only this shape, not this code.
 Records carry `:source/dataset "loop-ka-production"`, so they query alongside
 the workspace's other datasets. **If these are to join with repo-maturity /
 fleet / market-intel they must live on the SAME kotobase ref** — Datalog reaches
-exactly one ref (CLAUDE.md), and splitting for write throughput makes that join
+exactly one ref (AGENTS.md), and splitting for write throughput makes that join
 impossible, permanently. Decide the ref before the first write, not after.
 
 ## Why not a Worker, and why not inside the app

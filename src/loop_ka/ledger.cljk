@@ -1,7 +1,7 @@
 (ns loop-ka.ledger
   "record-evidence — one append-only record per production run.
 
-  Append-only on purpose. CLAUDE.md's docs rule is 'documents show the latest
+  Append-only on purpose. AGENTS.md's docs rule is 'documents show the latest
   state, git holds history' — with a named exception for measurement and event
   series, because overwriting them destroys the series. A production run is an
   event: it happened, at a time, with a verdict, and produced these CIDs. Last
@@ -14,7 +14,7 @@
 
   Entities carry `:source/dataset \"loop-ka-production\"` so the workspace's
   DataScript plane can query runs alongside the other datasets. NOTE: kotobase's
-  Datalog reaches exactly one ref (CLAUDE.md), so if these records are to join
+  Datalog reaches exactly one ref (AGENTS.md), so if these records are to join
   with repo-maturity / fleet / market-intel they must live on the SAME ref as
   those. Choosing a separate ref for write throughput would make that join
   impossible, permanently."
